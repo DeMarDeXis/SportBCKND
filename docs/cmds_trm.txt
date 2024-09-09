@@ -1,0 +1,6 @@
+1:
+    docker run --name=verba-db -e _='qwerty' -p 5432:5432 -d postgres:15-bullseye
+
+2:
+    migrate -path ./schema -database 'postgres://postgres:qwerty@192.168.99.100:5432?sslmode=disable' up/down
+3:
