@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log/slog"
 	"net/http"
+	"strconv"
 )
 
 type errorResponse struct {
@@ -15,7 +16,7 @@ type statusResponse struct {
 }
 
 func newErrorResponse(w http.ResponseWriter, logg *slog.Logger, statusCode int, message string) {
-	logg.Error(message)
+	logg.Error("Response status: " + strconv.Itoa(statusCode) + " message: " + message)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(statusCode)
 	response := errorResponse{Message: message}

@@ -1,15 +1,15 @@
 package handler
 
 import (
+	"context"
 	"errors"
 	"net/http"
-	"strconv"
 	"strings"
 )
 
 const (
 	authHeader = "Authorization"
-	userCtx    = "userId"
+	userCtx    = "userID"
 )
 
 func (h *Handler) userIdentity(next http.Handler) http.Handler {
@@ -32,8 +32,9 @@ func (h *Handler) userIdentity(next http.Handler) http.Handler {
 			return
 		}
 
-		r.Header.Set(userCtx, strconv.Itoa(userID))
-		next.ServeHTTP(w, r)
+		//r.Header.Set(userCtx, strconv.Itoa(userID))
+		ctx := context.WithValue(r.Context(), userCtx, userID)
+		next.ServeHTTP(w, r.WithContext(ctx))
 	})
 }
 

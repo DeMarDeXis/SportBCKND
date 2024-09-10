@@ -6,7 +6,6 @@ import (
 	"github.com/jmoiron/sqlx"
 	"log/slog"
 	"strings"
-	"time"
 )
 
 type TodoList struct {
@@ -29,8 +28,8 @@ func (t *TodoList) Create(userID int, list model.TodoList) (int, error) {
 	}
 
 	var id int
-	q := fmt.Sprintf("INSERT INTO %s (title, description, doe_date, created_at, updated_at) VALUES ($1, $2, $3, $4, $5) RETURNING id", todoListsTable)
-	row := tx.QueryRow(q, list.Title, list.Description, list.DoeDate, list.CreatedAt.Format(time.RFC3339), list.UpdatedAt.Format(time.RFC3339))
+	q := fmt.Sprintf("INSERT INTO %s (title, description, doe_date, created_at, updated_at) VALUES ($1, $2, $3, NOW(), NOW()) RETURNING id", todoListsTable)
+	row := tx.QueryRow(q, list.Title, list.Description, list.DoeDate)
 	if err := row.Scan(&id); err != nil {
 		tx.Rollback()
 		t.logger.Error("failed to scan id", slog.String("error", err.Error()))
@@ -50,7 +49,12 @@ func (t *TodoList) Create(userID int, list model.TodoList) (int, error) {
 
 func (t *TodoList) GetAll(userID int) ([]model.TodoList, error) {
 	var lists []model.TodoList
-	q := fmt.Sprintf("SELECT tl.id, tl.title, tl.description FROM %s tl INNER JOIN %s ul ON tl.id = ul.list_id WHERE ul.user_id = $1",
+	q := fmt.Sprintf(
+		`SELECT tl.id, tl.title, tl.description, tl.doe_date, tl.created_at, tl.updated_at 
+				FROM %s tl 
+				INNER JOIN %s ul 
+				ON tl.id = ul.list_id 
+				WHERE ul.user_id = $1`,
 		todoListsTable, usersListsTable)
 	err := t.db.Select(&lists, q, userID)
 	if err != nil {

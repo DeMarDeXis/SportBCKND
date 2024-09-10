@@ -21,7 +21,7 @@ tasks:
       - timeout /t 5 /nobreak
       - docker ps || echo "Failed to list running Docker containers"
       - timeout /t 5 /nobreak
-      - docker start verba-db || echo "Failed to start Docker container"
+      - docker start todo-db || echo "Failed to start Docker container"
       - timeout /t 5 /nobreak
       - echo check actual docker container
       - docker ps || echo "Failed to list running Docker containers"

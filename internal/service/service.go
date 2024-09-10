@@ -24,9 +24,9 @@ type Service struct {
 	TodoList
 }
 
-func NewService(strg *storage.Storage) *Service {
+func NewService(storage *storage.Storage) *Service {
 	return &Service{
-		Auth:     NewAuthService(strg.Authorization),
-		TodoList: NewTodoListService(strg.TodoList),
+		Auth:     NewAuthService(storage.Authorization),
+		TodoList: NewTodoListService(storage.TodoList),
 	}
 }

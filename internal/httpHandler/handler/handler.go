@@ -2,7 +2,7 @@ package handler
 
 import (
 	"github.com/DeMarDeXis/VProj/internal/httpHandler/handler/mw/logger"
-	"github.com/DeMarDeXis/VProj/internal/httpHandler/service"
+	"github.com/DeMarDeXis/VProj/internal/service"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/v5/middleware"
 	"log/slog"
@@ -35,13 +35,13 @@ func (h *Handler) InitRoutes(logg *slog.Logger) chi.Router {
 		r.Post("/sign-in", h.signIn)
 	})
 
-	router.Route("/group", func(r chi.Router) {
+	router.Route("/app", func(r chi.Router) {
 		r.Use(h.userIdentity)
-		r.Post("/lists", h.createList)
-		//	r.Get("/lists", h.getAllLists)
-		//	r.Get("/lists/{id}", h.getListByID)
-		//	r.Put("/lists/{id}", h.updateList)
-		//	r.Delete("/lists/{id}", h.deleteList)
+		r.Post("/tasks", h.createList)
+		r.Get("/tasks", h.getAllLists)
+		//	r.Get("/tasks/{id}", h.getListByID)
+		//	r.Put("/tasks/{id}", h.updateList)
+		//	r.Delete("/tasks/{id}", h.deleteList)
 	})
 	return router
 }
