@@ -69,7 +69,7 @@ func (t *TodoList) GetByID(userID, listID int) (model.TodoList, error) {
 	var list model.TodoList
 
 	q := fmt.Sprintf(`
-		SELECT tl.id, tl.title, tl.description
+		SELECT tl.id, tl.title, tl.description, tl.doe_date, tl.created_at, tl.updated_at
 		FROM %s tl 
 		INNER JOIN %s ul 
 		ON tl.id = ul.list_id 
@@ -98,6 +98,44 @@ func (t *TodoList) Delete(userID, listID int) error {
 	return nil
 }
 
+//func (t *TodoList) Update(userID, listID int, input model.UpdateListInput) error {
+//	setValues := make([]string, 0)
+//	args := make([]interface{}, 0)
+//	argID := 1
+//
+//	if input.Title != nil {
+//		setValues = append(setValues, fmt.Sprintf("title=$%d", argID))
+//		args = append(args, *input.Title)
+//		argID++
+//	}
+//
+//	if input.Description != nil {
+//		setValues = append(setValues, fmt.Sprintf("description=$%d", argID))
+//		args = append(args, *input.Description)
+//		argID++
+//	}
+//
+//	setQuery := strings.Join(setValues, ", ")
+//
+//	q := fmt.Sprintf(`UPDATE %s tl
+//							SET %s
+//							FROM %s ul
+//							WHERE tl.id = ul.list_id
+//							AND ul.list_id = $%d AND ul.user_id = $%d`,
+//		todoListsTable, setQuery, usersListsTable, argID, argID+1)
+//
+//	t.logger.Debug("Update query", slog.String("query", q))
+//	t.logger.Debug("Update args", slog.Any("args", args))
+//
+//	_, err := t.db.Exec(q, args...)
+//	if err != nil {
+//		t.logger.Error("failed to update list", slog.String("error", err.Error()))
+//		return err
+//	}
+//
+//	return err
+//}
+
 func (t *TodoList) Update(userID, listID int, input model.UpdateListInput) error {
 	setValues := make([]string, 0)
 	args := make([]interface{}, 0)
@@ -115,13 +153,23 @@ func (t *TodoList) Update(userID, listID int, input model.UpdateListInput) error
 		argID++
 	}
 
+	if input.DoeDate != nil {
+		setValues = append(setValues, fmt.Sprintf("doe_date=$%d", argID))
+		args = append(args, *input.DoeDate)
+		argID++
+	}
+
 	setQuery := strings.Join(setValues, ", ")
 
-	q := fmt.Sprintf(`UPDATE %s tl 
-							SET %s 
-							FROM %s ul 
-							WHERE tl.id = ul.list_id 
-							AND ul.list_id = $%d AND ul.user_id = $%d`,
+	// Добавляем userID и listID в список аргументов
+	args = append(args, listID, userID)
+
+	q := fmt.Sprintf(
+		`UPDATE %s tl
+        SET %s
+        FROM %s ul
+        WHERE tl.id = ul.list_id
+        AND ul.list_id = $%d AND ul.user_id = $%d`,
 		todoListsTable, setQuery, usersListsTable, argID, argID+1)
 
 	t.logger.Debug("Update query", slog.String("query", q))
@@ -133,5 +181,5 @@ func (t *TodoList) Update(userID, listID int, input model.UpdateListInput) error
 		return err
 	}
 
-	return err
+	return nil
 }

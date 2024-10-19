@@ -14,6 +14,11 @@ func (h *Handler) signUp(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if err := input.Validate(); err != nil {
+		newErrorResponse(w, h.logg, http.StatusBadRequest, err.Error())
+		return
+	}
+
 	id, err := h.service.Auth.CreateUser(input)
 	if err != nil {
 		newErrorResponse(w, h.logg, http.StatusInternalServerError, err.Error())
@@ -28,6 +33,7 @@ func (h *Handler) signUp(w http.ResponseWriter, r *http.Request) {
 
 type signInInput struct {
 	Username string `json:"username" binding:"required"`
+	Password string `json:"password" binding:"required"`
 }
 
 func (h *Handler) signIn(w http.ResponseWriter, r *http.Request) {
@@ -37,7 +43,7 @@ func (h *Handler) signIn(w http.ResponseWriter, r *http.Request) {
 		newErrorResponse(w, h.logg, http.StatusBadRequest, err.Error())
 		return
 	}
-	token, err := h.service.Auth.GenerateToken(input.Username)
+	token, err := h.service.Auth.GenerateToken(input.Username, input.Password)
 	if err != nil {
 		newErrorResponse(w, h.logg, http.StatusInternalServerError, err.Error())
 		return

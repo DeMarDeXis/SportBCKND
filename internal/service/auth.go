@@ -1,7 +1,9 @@
 package service
 
 import (
+	"crypto/sha1"
 	"errors"
+	"fmt"
 	"github.com/DeMarDeXis/VProj/internal/model"
 	"github.com/DeMarDeXis/VProj/internal/storage"
 	"github.com/golang-jwt/jwt"
@@ -9,6 +11,7 @@ import (
 )
 
 const (
+	salt       = "hjqrhjqw124617ajfhajs"
 	signingKey = "qrkjk#4#%35FSFJlja#4353KSFjH"
 	tokenTTL   = 24 * time.Hour
 )
@@ -29,11 +32,12 @@ func NewAuthService(storage storage.Authorization) *AuthService {
 }
 
 func (s *AuthService) CreateUser(user model.User) (int, error) {
+	user.Password = generatePasswordHash(user.Password)
 	return s.storage.CreateUser(user)
 }
 
-func (s *AuthService) GenerateToken(username string) (string, error) {
-	user, err := s.storage.GetUser(username)
+func (s *AuthService) GenerateToken(username, password string) (string, error) {
+	user, err := s.storage.GetUser(username, generatePasswordHash(password))
 	if err != nil {
 		return "", err
 	}
@@ -67,4 +71,11 @@ func (s *AuthService) ParseToken(accessToken string) (int, error) {
 	}
 
 	return claims.UserId, nil
+}
+
+func generatePasswordHash(password string) string {
+	hash := sha1.New()
+	hash.Write([]byte(password))
+
+	return fmt.Sprintf("%x", hash.Sum([]byte(salt)))
 }

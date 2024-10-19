@@ -1,24 +1,17 @@
 package model
 
 import (
-	"encoding/json"
 	"errors"
 	"time"
 )
 
 type TodoList struct {
-	ID          int             `json:"id" db:"id"`
-	Title       string          `json:"title" db:"title" binding:"required"`
-	Description string          `json:"description" db:"description"`
-	DoeDate     json.RawMessage `json:"doe_date" db:"doe_date"`
-	CreatedAt   time.Time       `json:"created_at" db:"created_at"`
-	UpdatedAt   time.Time       `json:"updated_at" db:"updated_at"`
-}
-
-type DateInput struct {
-	Year  int `json:"year"`
-	Month int `json:"month"`
-	Day   int `json:"day"`
+	ID          int       `json:"id" db:"id"`
+	Title       string    `json:"title" db:"title" binding:"required"`
+	Description string    `json:"description" db:"description"`
+	DoeDate     time.Time `json:"doe_date" db:"doe_date"`
+	CreatedAt   time.Time `json:"created_at" db:"created_at"`
+	UpdatedAt   time.Time `json:"updated_at" db:"updated_at"`
 }
 
 type UsersList struct {

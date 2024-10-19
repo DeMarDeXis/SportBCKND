@@ -39,9 +39,9 @@ func (h *Handler) InitRoutes(logg *slog.Logger) chi.Router {
 		r.Use(h.userIdentity)
 		r.Post("/tasks", h.createList)
 		r.Get("/tasks", h.getAllLists)
-		//	r.Get("/tasks/{id}", h.getListByID)
-		//	r.Put("/tasks/{id}", h.updateList)
-		//	r.Delete("/tasks/{id}", h.deleteList)
+		r.Get("/tasks/{id}", h.getListByID)
+		r.Put("/tasks/{id}", h.updateList)
+		r.Delete("/tasks/{id}", h.deleteList)
 	})
 	return router
 }

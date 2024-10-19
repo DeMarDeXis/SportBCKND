@@ -1,10 +1,8 @@
 package service
 
 import (
-	"encoding/json"
 	"github.com/DeMarDeXis/VProj/internal/model"
 	"github.com/DeMarDeXis/VProj/internal/storage"
-	"time"
 )
 
 type TodoListService struct {
@@ -20,29 +18,7 @@ func (s *TodoListService) Create(userID int, list model.TodoList) (int, error) {
 }
 
 func (s *TodoListService) GetAll(userID int) ([]model.TodoList, error) {
-	lists, err := s.storage.GetAll(userID)
-	if err != nil {
-		return nil, err
-	}
-
-	for i := range lists {
-		dueDate, err := time.Parse(time.RFC3339, string(lists[i].DoeDate))
-		if err != nil {
-			return nil, err
-		}
-		dateInput := model.DateInput{
-			Year:  dueDate.Year(),
-			Month: int(dueDate.Month()),
-			Day:   dueDate.Day(),
-		}
-		dateJSON, err := json.Marshal(dateInput)
-		if err != nil {
-			return nil, err
-		}
-		lists[i].DoeDate = json.RawMessage(dateJSON)
-	}
-
-	return lists, nil
+	return s.storage.GetAll(userID)
 }
 
 func (s *TodoListService) GetByID(userID, listID int) (model.TodoList, error) {

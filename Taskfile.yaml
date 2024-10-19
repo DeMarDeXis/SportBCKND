@@ -7,10 +7,10 @@ tasks:
     desc: "Run a command main"
     cmds:
       - go run ./cmd/main/main.go
-      -
   launcher:
     aliases:
       - launcher-cmd
+      - l
     desc: "Pre-runner for the main command"
     cmds:
       - echo "Checking machine..."
@@ -43,3 +43,15 @@ tasks:
       - echo "Stop docker machine..."
       - docker-machine stop default || echo "Failed to stop Docker machine"
       - echo "Success!! Pls check logs"
+
+  migrateUP:
+    aliases:
+      - mup
+    desc: "Migrate up"
+    cmd: migrate -path ./storage/migrations -database 'postgres://postgres:qwerty@192.168.99.100:5432?sslmode=disable' up
+
+  migrateDOWN:
+    aliases:
+      - mdown
+    desc: "Migrate down"
+    cmd: migrate -path ./storage/migrations -database 'postgres://postgres:qwerty@192.168.99.100:5432?sslmode=disable' down
