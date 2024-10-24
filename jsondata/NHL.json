@@ -1,0 +1,130 @@
+[
+{
+    "team_name": "Anaheim Ducks",
+    "abbreviation": "ANA"
+  },
+{
+    "team_name": "Boston Bruins",
+    "abbreviation": "BOS"
+  },
+{
+    "team_name": "Buffalo Sabres",
+    "abbreviation": "BUF"
+  },
+{
+    "team_name": "Carolina Hurricanes",
+    "abbreviation": "CAR"
+  },
+{
+    "team_name": "Columbus Blue Jackets",
+    "abbreviation": "CBJ"
+  },
+{
+    "team_name": "Calgary Flames",
+    "abbreviation": "CGY"
+  },
+{
+    "team_name": "Blackhawks",
+    "abbreviation": "CHI"
+  },
+{
+    "team_name": "Colorado Avalanche",
+    "abbreviation": "COL"
+  },
+{
+    "team_name": "Dallas Stars",
+    "abbreviation": "DAL"
+  },
+{
+    "team_name": "Detroit Red Wings",
+    "abbreviation": "DET"
+  },
+{
+    "team_name": "Edmonton Oilers",
+    "abbreviation": "EDM"
+  },
+{
+    "team_name": "Florida Panthers",
+    "abbreviation": "FLA"
+  },
+{
+    "team_name": "Los Angeles Kings",
+    "abbreviation": "LAK"
+  },
+{
+    "team_name": "Minnesota Wild",
+    "abbreviation": "MIN"
+  },
+{
+    "team_name": "Montreal Canadiens",
+    "abbreviation": "MTL"
+  },
+{
+    "team_name": "New Jersey Devils",
+    "abbreviation": "NJD"
+  },
+{
+    "team_name": "Nashville Predators",
+    "abbreviation": "NSH"
+  },
+{
+    "team_name": "New York Islanders",
+    "abbreviation": "NYI"
+  },
+{
+    "team_name": "New York Rangers",
+    "abbreviation": "NYR"
+  },
+{
+    "team_name": "Ottawa Senators",
+    "abbreviation": "OTT"
+  },
+{
+    "team_name": "Philadelphia Flyers",
+    "abbreviation": "PHI"
+  },
+{
+    "team_name": "Pittsburgh Penguins",
+    "abbreviation": "PIT"
+  },
+{
+    "team_name": "Seattle Kraken",
+    "abbreviation": "SEA"
+  },
+{
+    "team_name": "San Jose Sharks",
+    "abbreviation": "SJS"
+  },
+{
+    "team_name": "St. Louis Blues",
+    "abbreviation": "STL"
+  },
+{
+    "team_name": "Tampa Bay Lightning",
+    "abbreviation": "TBL"
+  },
+{
+    "team_name": "Toronto Maple Leafs",
+    "abbreviation": "TOR"
+  },
+{
+    "team_name": "Utah Hockey Club",
+    "abbreviation": "UTA"
+  },
+{
+    "team_name": "Vancouver Canucks",
+    "abbreviation": "VAN"
+  },
+{
+    "team_name": "Vegas Golden Knights",
+    "abbreviation": "VGK"
+  },
+{
+    "team_name": "Winnipeg Jets",
+    "abbreviation": "WPG"
+  },
+{
+    "team_name": "Washington Capitals",
+    "abbreviation": "WSH"
+  }
+]

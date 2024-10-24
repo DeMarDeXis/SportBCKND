@@ -1,5 +1,5 @@
-DROP TABLE users_lists;
+DROP TABLE users_teams;
 
-DROP TABLE todo_lists;
+DROP TABLE teams;
 
 DROP TABLE users;

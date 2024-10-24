@@ -1,3 +1,5 @@
+BEGIN;
+
 CREATE TABLE users
 (
     id serial not null unique,
@@ -6,19 +8,22 @@ CREATE TABLE users
     password_hash VARCHAR(255) not null
 );
 
-CREATE TABLE todo_lists
+
+CREATE TABLE teams
 (
+    img_url varchar(255) not null,
     id serial not null unique,
-    title varchar(255) not null,
-    description varchar(255),
-    doe_date date not null,
-    created_at date not null,
-    updated_at date not null
+    name varchar(50) not null,
+    abbreviation varchar(3) not null
 );
 
-CREATE TABLE users_lists
+CREATE TABLE users_teams
 (
     id serial not null unique,
     user_id int references users(id) on delete cascade not null,
     list_id int references todo_lists(id) on delete cascade not null
 );
+
+-- CREATE TABLE users_admins
+
+COMMIT;

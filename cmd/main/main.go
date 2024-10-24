@@ -20,15 +20,12 @@ import (
 )
 
 func main() {
-	//TODO: init cfg
 	cfg := config.InitConfig()
 
-	//TODO: init logger
 	logg := setupPrettySlogLocal()
 
 	logg.Info("starting VProj", slog.String("env", cfg.Env))
 
-	//TODO: init db
 	db, err := postgres.New(postgres.StorageConfig{
 		Host:     cfg.StorageConfig.Host,
 		Port:     cfg.StorageConfig.Port,
@@ -45,15 +42,12 @@ func main() {
 	storageInit := storage.NewStorage(db, logg)
 	logg.Info("db connected")
 
-	//TODO: init service
 	services := service.NewService(storageInit)
 	logg.Info("service created")
 
-	//TODO: init handlers
 	handlers := handler.NewHandler(services, logg)
 	logg.Info("handler created")
 
-	//TODO: init server
 	srv := http.Server{
 		Addr:         cfg.Address + ":" + strconv.Itoa(cfg.HTTPServer.Port),
 		Handler:      handlers.InitRoutes(logg),
@@ -69,7 +63,6 @@ func main() {
 		}
 	}()
 
-	// TODO: Graceful shutdown
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
@@ -82,7 +75,6 @@ func main() {
 		logg.Error("server forced to shutdown", err)
 	}
 
-	// TODO: close db connection
 	if err := db.Close(); err != nil {
 		logg.Error("failed to close db connection", err)
 	} else {
@@ -99,7 +91,10 @@ func setupPrettySlogLocal() *slog.Logger {
 		},
 	}
 
-	handler := opts.NewPrettyHandler(os.Stdout)
+	handlerLog := opts.NewPrettyHandler(os.Stdout)
 
-	return slog.New(handler)
+	return slog.New(handlerLog)
 }
+//TODO: CREATE all tables
+//TODO: query for add teams list
+//TODO: made all rosters for teams

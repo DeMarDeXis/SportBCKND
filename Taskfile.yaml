@@ -4,6 +4,7 @@ tasks:
   main:
     aliases:
       - main-cmd
+      - m
     desc: "Run a command main"
     cmds:
       - go run ./cmd/main/main.go
@@ -31,6 +32,7 @@ tasks:
   exit:
     aliases:
       - exit-cmd
+      - e
     desc: "Exit cmd for clear desktop"
     cmds:
       - timeout /t 5 /nobreak
@@ -55,3 +57,10 @@ tasks:
       - mdown
     desc: "Migrate down"
     cmd: migrate -path ./storage/migrations -database 'postgres://postgres:qwerty@192.168.99.100:5432?sslmode=disable' down
+
+  parser:
+    aliases:
+      - parser-cmd
+      - p
+    desc: "Parser cmd for clear desktop"
+    cmd: go run ./cmd/parser/main.go
