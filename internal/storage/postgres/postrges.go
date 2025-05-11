@@ -10,14 +10,19 @@ const (
 	DBName = "postgres"
 )
 
+// It an old code, but I don't want to delete it
+// I'm sorry for that
 const (
 	usersTable      = "users"
-	todoListsTable  = "todo_lists"
-	usersListsTable = "users_lists"
+	teamsTable      = "teams"
+	usersTeamsTable = "users_teams"
+	nhlTeamsTable   = "nhl_teams"
+	nflTeamsTable   = "nfl_teams"
+	nhlRosterTable  = "nhl_roster"
 )
 
 type StorageConfig struct {
-	Host     string `yaml:"host" env-default:"192.168.99.100"`
+	Host     string `yaml:"host" env-default:"192.168.99.101"`
 	Port     string `yaml:"port" env-default:"5432"`
 	Username string `yaml:"username" env-default:"postgres"`
 	Password string `yaml:"password"`

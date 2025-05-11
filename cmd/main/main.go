@@ -24,7 +24,7 @@ func main() {
 
 	logg := setupPrettySlogLocal()
 
-	logg.Info("starting VProj", slog.String("env", cfg.Env))
+	logg.Info("starting Diplom", slog.String("env", cfg.Env))
 
 	db, err := postgres.New(postgres.StorageConfig{
 		Host:     cfg.StorageConfig.Host,
@@ -39,7 +39,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	storageInit := storage.NewStorage(db, logg)
+	storageInit := storage.NewStorage(db)
 	logg.Info("db connected")
 
 	services := service.NewService(storageInit)
@@ -95,6 +95,9 @@ func setupPrettySlogLocal() *slog.Logger {
 
 	return slog.New(handlerLog)
 }
-//TODO: CREATE all tables
-//TODO: query for add teams list
-//TODO: made all rosters for teams
+
+// TODO: \internal\model\nhl.go (16.02.25)
+// TODO: get information about teams -> method (11.05.25)
+// TODO: refactor storage query for GetLastSchedule, it must be corrected. Must output the next 10 games after already played games. (11.05.25)
+// TODO: make method for getting NBA teams (11.05.25)
+// TODO: Necesito hacer un Tableau para equipos deportivos favoritos de los usuarios (11.05.25)

@@ -1,1 +1,6 @@
-*~
+.idea
+.env
+jsondata
+docs/*.txt
+config
+Taskfile.yaml

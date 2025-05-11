@@ -11,22 +11,29 @@ type Auth interface {
 	ParseToken(token string) (int, error)
 }
 
+type NHLList interface {
+	GetTeams() ([]model.NHLTeamsOutput, error)
+	GetSchedule() ([]model.NHLScheduleOutput, error)
+	GetLastSchedule(count int) ([]model.NHLScheduleOutput, error)
+}
+
+// TodoList TODO: delete
 type TodoList interface {
 	Create(userID int, list model.TodoList) (int, error)
 	GetAll(userID int) ([]model.TodoList, error)
 	GetByID(userID, listID int) (model.TodoList, error)
 	Delete(userID, listID int) error
-	Update(userID, listID int, input model.UpdateListInput) error
+	//Update(userID, listID int, input model.UpdateListInput) error
 }
 
 type Service struct {
 	Auth
-	TodoList
+	NHLList
 }
 
 func NewService(storage *storage.Storage) *Service {
 	return &Service{
-		Auth:     NewAuthService(storage.Authorization),
-		TodoList: NewTodoListService(storage.TodoList),
+		Auth:    NewAuthService(storage.Authorization),
+		NHLList: NewNHLListService(storage.NHLList),
 	}
 }

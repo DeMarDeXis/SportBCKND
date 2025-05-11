@@ -3,7 +3,9 @@ module github.com/DeMarDeXis/VProj
 go 1.23.2
 
 require (
+	github.com/PuerkitoBio/goquery v1.10.0
 	github.com/fatih/color v1.17.0
+	github.com/geziyor/geziyor v0.0.0-20240812061556-229b8ca83ac1
 	github.com/go-chi/chi v1.5.5
 	github.com/go-chi/chi/v5 v5.1.0
 	github.com/golang-jwt/jwt v3.2.2+incompatible
@@ -15,7 +17,6 @@ require (
 
 require (
 	github.com/BurntSushi/toml v1.2.1 // indirect
-	github.com/PuerkitoBio/goquery v1.10.0 // indirect
 	github.com/VividCortex/gohistogram v1.0.0 // indirect
 	github.com/andybalholm/cascadia v1.3.2 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
@@ -23,7 +24,6 @@ require (
 	github.com/chromedp/cdproto v0.0.0-20241014181340-cb3a7a1d51d7 // indirect
 	github.com/chromedp/chromedp v0.11.0 // indirect
 	github.com/chromedp/sysutil v1.1.0 // indirect
-	github.com/geziyor/geziyor v0.0.0-20240812061556-229b8ca83ac1 // indirect
 	github.com/go-kit/kit v0.13.0 // indirect
 	github.com/gobwas/httphead v0.1.0 // indirect
 	github.com/gobwas/pool v0.2.1 // indirect

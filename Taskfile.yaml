@@ -8,6 +8,7 @@ tasks:
     desc: "Run a command main"
     cmds:
       - go run ./cmd/main/main.go
+
   launcher:
     aliases:
       - launcher-cmd
@@ -22,7 +23,7 @@ tasks:
       - timeout /t 5 /nobreak
       - docker ps || echo "Failed to list running Docker containers"
       - timeout /t 5 /nobreak
-      - docker start todo-db || echo "Failed to start Docker container"
+      - docker start diplom-db || echo "Failed to start Docker container"
       - timeout /t 5 /nobreak
       - echo check actual docker container
       - docker ps || echo "Failed to list running Docker containers"
@@ -37,7 +38,7 @@ tasks:
     cmds:
       - timeout /t 5 /nobreak
       - echo "Cmd is starting..."
-      - docker stop todo-db || echo "Failed to stop Docker container"
+      - docker stop diplom-db || echo "Failed to stop Docker container"
       - echo "Check docker..."
       - docker ps
       - echo "Check all docker..."
@@ -50,17 +51,10 @@ tasks:
     aliases:
       - mup
     desc: "Migrate up"
-    cmd: migrate -path ./storage/migrations -database 'postgres://postgres:qwerty@192.168.99.100:5432?sslmode=disable' up
+    cmd: migrate -path ./storage/migrations -database 'postgres://postgres:qwerty@192.168.99.101:5432?sslmode=disable' up
 
   migrateDOWN:
     aliases:
       - mdown
     desc: "Migrate down"
-    cmd: migrate -path ./storage/migrations -database 'postgres://postgres:qwerty@192.168.99.100:5432?sslmode=disable' down
-
-  parser:
-    aliases:
-      - parser-cmd
-      - p
-    desc: "Parser cmd for clear desktop"
-    cmd: go run ./cmd/parser/main.go
+    cmd: migrate -path ./storage/migrations -database 'postgres://postgres:qwerty@192.168.99.101:5432?sslmode=disable' down

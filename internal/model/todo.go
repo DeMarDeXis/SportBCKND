@@ -1,7 +1,6 @@
 package model
 
 import (
-	"errors"
 	"time"
 )
 
@@ -14,22 +13,22 @@ type TodoList struct {
 	UpdatedAt   time.Time `json:"updated_at" db:"updated_at"`
 }
 
-type UsersList struct {
-	ID     int
-	UserID int
-	ListID int
-}
-
-type UpdateListInput struct {
-	Title       *string `json:"title"`
-	Description *string `json:"description"`
-	DoeDate     *string `json:"doe_date"`
-}
-
-func (l UpdateListInput) Validate() error {
-	if l.Title == nil && l.Description == nil && l.DoeDate == nil {
-		return errors.New("update struct has no values")
-	}
-
-	return nil
-}
+//type UsersList struct {
+//	ID     int
+//	UserID int
+//	ListID int
+//}
+//
+//type UpdateListInput struct {
+//	Title       *string `json:"title"`
+//	Description *string `json:"description"`
+//	DoeDate     *string `json:"doe_date"`
+//}
+//
+//func (l UpdateListInput) Validate() error {
+//	if l.Title == nil && l.Description == nil && l.DoeDate == nil {
+//		return errors.New("update struct has no values")
+//	}
+//
+//	return nil
+//}

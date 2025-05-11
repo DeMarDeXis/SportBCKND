@@ -1,0 +1,11 @@
+c:\users\user\documents\github\trainerfordiplom\adminappfordiplom
+
+migrate create -ext sql -dir ./schema -seq init
+
+migrate -path ./storage/migrations -database 'postgres://postgres:qwerty@192.168.99.101:5432?sslmode=disable' up
+
+migrate -path ./storage/migrations -database 'postgres://postgres:qwerty@192.168.99.101:5432?sslmode=disable' down
+
+migrate -path ./storage/migrations -database 'postgres://postgres:qwerty@192.168.99.101:5432?sslmode=disable' down 1
+
+migrate -path ./storage/migrations -database 'postgres://postgres:qwerty@192.168.99.101:5432?sslmode=disable' goto 4

@@ -4,7 +4,6 @@ import (
 	model "github.com/DeMarDeXis/VProj/internal/model"
 	"github.com/DeMarDeXis/VProj/internal/storage/postgres"
 	"github.com/jmoiron/sqlx"
-	"log/slog"
 )
 
 type Authorization interface {
@@ -12,22 +11,24 @@ type Authorization interface {
 	GetUser(username, password string) (model.User, error)
 }
 
-type TodoList interface {
-	Create(userID int, list model.TodoList) (int, error)
-	GetAll(userID int) ([]model.TodoList, error)
-	GetByID(userID, listID int) (model.TodoList, error)
-	Delete(userID, listID int) error
-	Update(userID, listID int, input model.UpdateListInput) error
+type NHLList interface {
+	GetTeams() ([]model.NHLTeamsOutput, error)
+	GetSchedule() ([]model.NHLScheduleOutput, error)
+	GetLastSchedule(count int) ([]model.NHLScheduleOutput, error)
+}
+
+type NBAList interface {
+	// GetTeams() (error) //TODO: add model
 }
 
 type Storage struct {
 	Authorization
-	TodoList
+	NHLList
 }
 
-func NewStorage(db *sqlx.DB, log *slog.Logger) *Storage {
+func NewStorage(db *sqlx.DB) *Storage {
 	return &Storage{
 		Authorization: postgres.NewAuth(db),
-		TodoList:      postgres.NewTodoList(db, log),
+		NHLList:       postgres.NewNHLList(db),
 	}
 }
